@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Whimsey</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #ff5a33;
+      --card: #ffffff;
+      --border: #dbe2ea;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: linear-gradient(180deg, #b8c6d6, #e2e8f1 30%, var(--bg));
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    main {
+      width: min(900px, 100% - 2rem);
+      margin: 2rem auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+    }
+
+    h1 { margin: 0; font-size: 2rem; }
+    p { margin: .5rem 0 0; color: var(--muted); }
+
+    .tabs, .cats, .actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .section { margin-top: 1.25rem; }
+    button {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 999px;
+      padding: .5rem .9rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button.active,
+    button.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: #d84a29;
+    }
+
+    #idea {
+      margin-top: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      background: #f9fbff;
+    }
+
+    #idea-category {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: .5rem;
+      font-weight: 700;
+    }
+
+    #idea-text { font-size: 1.2rem; line-height: 1.5; }
+    ul { padding-left: 1.25rem; }
+    li + li { margin-top: .75rem; }
+    .small { font-size: .9rem; color: var(--muted); }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Whimsey!</h1>
+    <p>The same-day wonder engine.</p>
+
+    <div class="tabs section" role="tablist" aria-label="Pages">
+      <button id="tab-home" class="active" type="button">Home</button>
+      <button id="tab-log" type="button">My Whimsies (<span id="count-tab">0</span>)</button>
+    </div>
+
+    <section id="home-view" class="section">
+      <div class="cats" id="category-list" aria-label="Categories"></div>
+
+      <div id="idea">
+        <div id="idea-category">Ready when you are</div>
+        <div id="idea-text">Press the button to receive a whimsy.</div>
+      </div>
+
+      <div class="actions section">
+        <button id="pick" class="primary" type="button">I’m feeling whimsical</button>
+        <button id="complete" type="button" class="hidden">I did it!</button>
+      </div>
+    </section>
+
+    <section id="log-view" class="section hidden">
+      <p class="small" id="count-copy">0 whimsies completed</p>
+      <ul id="log-list"></ul>
+      <p id="log-empty" class="small">Nothing here yet. Complete a whimsy and it will show up here.</p>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
