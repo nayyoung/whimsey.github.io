@@ -110,7 +110,12 @@ function renderLog() {
 
   for (const item of state.log) {
     const li = document.createElement('li');
-    li.innerHTML = `<strong>${escapeHtml(CAT_LABELS[item.c] || item.c)}</strong> · ${fmt.format(item.ts)}<br>${escapeHtml(item.t)}`;
+
+    const meta = document.createElement('strong');
+    meta.textContent = `${CAT_LABELS[item.c] || item.c} · ${fmt.format(item.ts)}`;
+    li.append(meta, document.createElement('br'));
+    li.append(document.createTextNode(item.t));
+
     els.logList.appendChild(li);
   }
 }
@@ -138,15 +143,6 @@ function render() {
   els.logView.classList.toggle('hidden', home);
   els.tabHome.classList.toggle('active', home);
   els.tabLog.classList.toggle('active', !home);
-}
-
-function escapeHtml(value) {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
 }
 
 render();
